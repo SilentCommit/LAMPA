@@ -60,6 +60,11 @@ object ChannelManager {
     @SuppressLint("RestrictedApi")
     @RequiresApi(Build.VERSION_CODES.O)
     fun update(name: String, list: List<LampaCard>) {
+        if (!ChannelHelper.hasTvProvider()) {
+            Log.w(TAG, "TV Provider unavailable, skip channel update")
+            return
+        }
+
         if (BuildConfig.DEBUG) Log.d(TAG, "update($name, ${list.size} items)")
         removeLostChannels()
 

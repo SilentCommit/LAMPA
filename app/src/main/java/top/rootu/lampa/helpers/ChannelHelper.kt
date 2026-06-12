@@ -34,6 +34,18 @@ val Channel.data: String
 
 object ChannelHelper {
 
+    private const val TAG = "ChannelHelper"
+
+    /**
+     * Checks whether Android TV Provider is available on the device.
+     */
+    fun hasTvProvider(): Boolean {
+        return App.context.packageManager.resolveContentProvider(
+            "android.media.tv",
+            0
+        ) != null
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private val CHANNELS_PROJECTION = arrayOf(
         TvContractCompat.Channels._ID,
